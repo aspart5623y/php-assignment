@@ -1,0 +1,18 @@
+# Enable URL Rewriting
+RewriteEngine On
+RewriteBase /php-ass/
+
+# Redirect clean URLs to index.php for processing
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+# Custom Error Pages
+ErrorDocument 404 /errors/not-found.php
+ErrorDocument 500 /errors/internal-server-error.php
+
+# PHP Configuration
+php_flag display_errors on
+php_value error_reporting E_ALL
+php_value max_execution_time 60
+php_value upload_max_filesize 10M
